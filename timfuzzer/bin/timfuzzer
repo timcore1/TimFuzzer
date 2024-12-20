@@ -10,7 +10,7 @@ module TimFuzzer
       true
     end
 
-    def self.banner
+    def self.ascii_banner
       <<-BANNER
    ▄▄▄▄▄▄▄ ▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄   
   █       █   █  █▄█  █       █  █ █  █       █       █       █   ▄  █  
@@ -30,7 +30,7 @@ module TimFuzzer
     end
 
     def self.show_welcome
-      puts banner.colorize(:blue)
+      puts ascii_banner.colorize(:blue)
       puts version_info
       puts "\nИспользование:".colorize(:blue)
       puts "  timfuzzer КОМАНДА [ОПЦИИ]".colorize(:blue)
