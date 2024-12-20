@@ -21,15 +21,17 @@ module TimFuzzer
       end
       
       def list_modules
-        puts "\nДоступные модули:"
+        puts "\nДоступные модули:".colorize(:blue)
         Dir[File.join(MODULES_PATH, '*.rb')].each do |file|
           require file
           module_name = File.basename(file, '.rb')
           class_name = module_name.split('_').map(&:capitalize).join
           
-          module_class = TimFuzzer.const_get("#{class_name}Module").new(Config.new)
-          puts "- #{module_name}: #{module_class.description}"
+          module_class = TimFuzzer.const_get("#{class_name}Module")
+          instance = module_class.new
+          puts "  - #{module_name}: #{instance.description}".colorize(:green)
         end
+        puts "\n"
       end
       
       private

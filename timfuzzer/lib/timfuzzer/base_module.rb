@@ -2,7 +2,7 @@ module TimFuzzer
   class BaseModule
     attr_reader :name, :description, :config
     
-    def initialize(config)
+    def initialize(config = nil)
       @name = self.class.name
       @description = "Базовый модуль фаззинга"
       @config = config
@@ -22,7 +22,7 @@ module TimFuzzer
         timestamp: Time.now
       }
       
-      if @config.get('reporting', 'save_responses')
+      if @config && @config.get('reporting', 'save_responses')
         max_size = @config.get('reporting', 'max_response_size')
         result[:response_body] = response.body[0..max_size]
       end
@@ -31,9 +31,10 @@ module TimFuzzer
     end
     
     def module_config
+      return {} unless @config
       module_name = self.class.name.split('::').last.gsub(/Module$/, '').
                    gsub(/(.)([A-Z])/, '\1_\2').downcase
-      @config.get('modules', module_name)
+      @config.get('modules', module_name) || {}
     end
   end
 end 
