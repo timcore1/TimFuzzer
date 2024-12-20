@@ -60,9 +60,12 @@ module TimFuzzer
       ModuleLoader.list_modules
     end
 
-    def help(*)
-      self.class.show_welcome
-      super
+    def help(command = nil)
+      if command.nil?
+        self.class.show_welcome
+      else
+        super
+      end
     end
 
     default_task :help
