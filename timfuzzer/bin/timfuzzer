@@ -25,7 +25,7 @@ module TimFuzzer
     def self.version_info
       "\nTimFuzzer v1.0.0 - Инструмент для фаззинг-тестирования веб-приложений".colorize(:blue) +
       "\nАвтор: Mikhail Tarasov (Timcore)".colorize(:blue) +
-      "\nGitHub: https://github.com/timcore".colorize(:blue) +
+      "\nGitHub: https://github.com/timcore1/TimFuzzer".colorize(:blue) +
       "\nЛицензия: MIT\n".colorize(:blue)
     end
 
