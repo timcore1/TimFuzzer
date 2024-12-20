@@ -64,13 +64,10 @@ module TimFuzzer
       self.class.show_welcome
       super
     end
+
+    default_task :help
   end
   
-  # Показываем приветствие только при запуске без параметров
-  if ARGV.empty?
-    CLI.show_welcome
-    exit 0
-  end
-
+  # Запускаем CLI
   CLI.start(ARGV)
 end 
