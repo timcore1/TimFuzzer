@@ -1,19 +1,12 @@
 require_relative '../lib/timfuzzer/base_module'
 
 module TimFuzzer
-  class SQLInjectionModule < BaseModule
+  class XSSModule < BaseModule
     def initialize(config = nil)
       super
-      @name = "SQL Injection Scanner"
-      @description = "Модуль для поиска SQL-инъекций"
+      @name = "XSS Scanner"
+      @description = "Модуль для поиска XSS-уязвимостей"
       @payloads = load_payloads
-      @signatures = [
-        'mysql_fetch_array()',
-        'You have an error in your SQL syntax',
-        'ORA-01756',
-        'SQLite3::SQLException',
-        'System.Data.SQLite.SQLiteException'
-      ]
     end
     
     def run(url, agent)
@@ -23,7 +16,7 @@ module TimFuzzer
         begin
           encoded_payload = URI.encode_www_form_component(payload)
           response = agent.get("#{url}#{encoded_payload}")
-          if vulnerable?(response)
+          if vulnerable?(response, payload)
             results << log_vulnerability(url, payload, response)
           end
         rescue => e
@@ -37,11 +30,12 @@ module TimFuzzer
     private
     
     def load_payloads
-      File.readlines(File.join(__dir__, '../payloads/sql_injection.txt')).map(&:chomp)
+      File.readlines(File.join(__dir__, '../payloads/xss.txt')).map(&:chomp)
     end
     
-    def vulnerable?(response)
-      @signatures.any? { |sig| response.body.include?(sig) }
+    def vulnerable?(response, payload)
+      response.body.include?(payload) && 
+      !response.body.include?(CGI.escapeHTML(payload))
     end
   end
 end 

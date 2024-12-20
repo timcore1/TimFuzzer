@@ -2,7 +2,7 @@ require_relative '../lib/timfuzzer/base_module'
 
 module TimFuzzer
   class LFIModule < BaseModule
-    def initialize
+    def initialize(config = nil)
       super
       @name = "LFI Scanner"
       @description = "Модуль для поиска уязвимостей локального включения файлов"

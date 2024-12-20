@@ -2,7 +2,7 @@ require_relative '../lib/timfuzzer/base_module'
 
 module TimFuzzer
   class CommandInjectionModule < BaseModule
-    def initialize
+    def initialize(config = nil)
       super
       @name = "Command Injection Scanner"
       @description = "Модуль для поиска уязвимостей внедрения команд"
