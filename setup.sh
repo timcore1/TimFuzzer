@@ -22,5 +22,13 @@ chmod +x timfuzzer/bin/timfuzzer
 # Создаем директории для модулей
 mkdir -p timfuzzer/lib/timfuzzer
 
+# Создаем директорию для локальных гемов
+mkdir -p ~/.gem
+mkdir -p timfuzzer/vendor/bundle
+
 # Устанавливаем права
 chmod -R 755 timfuzzer
+
+echo "Установка завершена. Теперь выполните:"
+echo "cd timfuzzer"
+echo "bundle install --path vendor/bundle"
