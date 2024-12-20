@@ -37,7 +37,8 @@ module TimFuzzer
       private
       
       def should_load_module?(module_name, selected_modules, config)
-        return false unless config.get('modules', module_name, 'enabled')
+        module_config = config.get('modules', module_name)
+        return false unless module_config && module_config['enabled']
         selected_modules.nil? || selected_modules.include?(module_name)
       end
     end
