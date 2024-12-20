@@ -1,0 +1,17 @@
+;id
+|id
+`id`
+$(id)
+; cat /etc/passwd
+| cat /etc/passwd
+& dir
+&& dir
+| dir C:\
+; ls -la
+| ls -la
+`ping -c 1 127.0.0.1`
+$(ping -c 1 127.0.0.1)
+;sleep 5
+|sleep 5
+`sleep 5`
+$(sleep 5) 

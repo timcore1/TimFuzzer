@@ -1,0 +1,43 @@
+# Общие настройки
+general:
+  timeout: 30
+  max_threads: 10
+  user_agent: "TimFuzzer/1.0"
+  follow_redirects: true
+  max_redirects: 3
+
+# Настройки прокси
+proxy:
+  enabled: false
+  host: "127.0.0.1"
+  port: 8080
+  username: ""
+  password: ""
+
+# Настройки модулей
+modules:
+  sql_injection:
+    enabled: true
+    timeout: 10
+    max_payloads: 100
+    
+  xss:
+    enabled: true
+    timeout: 10
+    max_payloads: 100
+    
+  lfi:
+    enabled: true
+    timeout: 10
+    max_payloads: 50
+    
+  command_injection:
+    enabled: true
+    timeout: 15
+    max_payloads: 50
+
+# Настройки отчетов
+reporting:
+  format: "json"
+  save_responses: true
+  max_response_size: 10240 

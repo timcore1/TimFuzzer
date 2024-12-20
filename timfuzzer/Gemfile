@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+gem 'nokogiri'
+gem 'mechanize'
+gem 'thor'
+gem 'colorize'
+gem 'parallel'
+gem 'json'
+gem 'yaml' 

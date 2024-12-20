@@ -1,0 +1,76 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+require 'colorize'
+require_relative '../lib/timfuzzer'
+
+module TimFuzzer
+  class CLI < Thor
+    def self.exit_on_failure?
+      true
+    end
+
+    def self.banner
+      <<-BANNER
+   ▄▄▄▄▄▄▄ ▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄   
+  █       █   █  █▄█  █       █  █ █  █       █       █       █   ▄  █  
+  █▄     ▄█   █       █    ▄▄▄█  █▄█  █▄▄▄▄   █    ▄▄▄█   ▄   █  █ █ █  
+    █   █ █   █       █   █▄▄▄█       █▄▄▄▄█  █   █▄▄▄█  █ █  █   █▄▄█▄ 
+    █   █ █   █       █    ▄▄▄█       █▄▄▄▄█  █    ▄▄▄█  █▄█  █    ▄▄  █
+    █   █ █   █ ██▄██ █   █   █       █▄▄▄▄   █   █   █       █   █  █ █
+    █▄▄▄█ █▄▄▄█▄█   █▄█▄▄▄█   █▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄█   █▄▄▄▄▄▄▄█▄▄▄█  █▄█
+      BANNER
+    end
+
+    def self.version_info
+      "\nTimFuzzer v1.0.0 - Инструмент для фаззинг-тестирования веб-приложений".colorize(:blue) +
+      "\nАвтор: Mikhail Tarasov (Timcore)".colorize(:blue) +
+      "\nGitHub: https://github.com/timcore".colorize(:blue) +
+      "\nЛицензия: MIT\n".colorize(:blue)
+    end
+
+    def self.show_welcome
+      puts banner.colorize(:blue)
+      puts version_info
+      puts "\nИспользование:".colorize(:blue)
+      puts "  timfuzzer КОМАНДА [ОПЦИИ]".colorize(:blue)
+      puts "\nДоступные команды:".colorize(:blue)
+      puts "  timfuzzer scan URL        - Начать сканирование указанного URL"
+      puts "  timfuzzer list-modules    - Показать список доступных модулей"
+      puts "  timfuzzer help [КОМАНДА]  - Показать справку по команде"
+      puts "\nПримеры использования:".colorize(:blue)
+      puts "  timfuzzer scan http://example.com -m POST -t 10 -M sql_injection,xss"
+      puts "  timfuzzer scan http://target.com --config custom_config.yml"
+      puts "\n"
+    end
+
+    desc "scan URL", "Начать фаззинг указанного URL"
+    method_option :method, aliases: "-m", default: "GET", desc: "HTTP метод (GET/POST)"
+    method_option :threads, aliases: "-t", default: 5, type: :numeric, desc: "Количество потоков"
+    method_option :modules, aliases: "-M", type: :array, desc: "Модули для тестирования"
+    method_option :output, aliases: "-o", default: "report.json", desc: "Файл отчета"
+    method_option :config, aliases: "-c", desc: "Путь к конфигурационному файлу"
+    def scan(url)
+      scanner = Scanner.new(url, options)
+      scanner.run
+    end
+    
+    desc "list-modules", "Показать доступные модули"
+    def list_modules
+      ModuleLoader.list_modules
+    end
+
+    def help(*)
+      self.class.show_welcome
+      super
+    end
+  end
+  
+  # Показываем приветствие только при запуске без параметров
+  if ARGV.empty?
+    CLI.show_welcome
+    exit 0
+  end
+
+  CLI.start(ARGV)
+end 
