@@ -36,3 +36,30 @@ TimFuzzer — это мощный инструмент для фаззинг-т�
 
 ## 💻 Установка
 
+
+Обновляем систему
+
+`sudo apt update`
+
+`sudo apt upgrade -y`
+
+Устанавливаем необходимые пакеты
+
+`sudo apt install -y ruby ruby-dev ruby-bundler git build-essential`
+
+Клонируем репозиторий
+
+`git clone https://github.com/timcore1/TimFuzzer.git`
+
+`cd TimFuzzer`
+
+Настраиваем инструмент
+
+`chmod +x setup.sh`
+
+`./setup.sh`
+
+Устанавливаем зависимости
+
+`cd timfuzzer`
+bundle install
