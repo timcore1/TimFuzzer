@@ -1,7 +1,8 @@
 require_relative '../lib/timfuzzer/base_module'
+require 'cgi'
 
 module TimFuzzer
-  class XSSModule < BaseModule
+  class XssModule < BaseModule
     def initialize(config = nil)
       super
       @name = "XSS Scanner"
