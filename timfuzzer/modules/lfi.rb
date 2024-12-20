@@ -1,7 +1,7 @@
 require_relative '../lib/timfuzzer/base_module'
 
 module TimFuzzer
-  class LFIModule < BaseModule
+  class LfiModule < BaseModule
     def initialize(config = nil)
       super
       @name = "LFI Scanner"
