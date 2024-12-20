@@ -1,7 +1,7 @@
 require_relative '../lib/timfuzzer/base_module'
 
 module TimFuzzer
-  class SQLInjectionModule < BaseModule
+  class SqlInjectionModule < BaseModule
     def initialize(config = nil)
       super
       @name = "SQL Injection Scanner"
