@@ -1,6 +1,6 @@
 # TimFuzzer
 <p align="center">
- <img src="docs/images/banner.png" alt="TimFuzzer Banner" width="800"/>
+ <img src="Fuzzer.png" alt="TimFuzzer Banner" width="800"/>
 </p>
 <p align="center">
  <a href="https://opensource.org/licenses/MIT">
